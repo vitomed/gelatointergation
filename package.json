@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "@gelatonetwork/automate-sdk": "^2.1.0"
+  },
+  "devDependencies": {
+    "hardhat": "^2.13.0"
+  }
+}
