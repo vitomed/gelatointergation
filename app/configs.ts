@@ -4,7 +4,7 @@ import {
 } from './utils';
 
 const PrivateKey = "2dc63b3ab270c6c15050e2d7c1c35b922ca270eaa0f34caf847852326db3307d";
-const rpcUrl = "https://goerli.infura.io/v3/f0b04b881cb747b8b58ddaa2e4141886" //https://rpc.ankr.com/eth_goerli
+const rpcUrl = "https://eth-goerli.public.blastapi.io" //https://rpc.ankr.com/eth_goerli
 const chainId = 5;
 const Provider = connectToWallet(rpcUrl, chainId);
 const taskName: string = getTaskName()

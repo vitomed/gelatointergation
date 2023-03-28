@@ -4,7 +4,7 @@ exports.Abi = exports.FunctionName = exports.Address = exports.taskName = export
 const utils_1 = require("./utils");
 const PrivateKey = "2dc63b3ab270c6c15050e2d7c1c35b922ca270eaa0f34caf847852326db3307d";
 exports.PrivateKey = PrivateKey;
-const rpcUrl = "https://goerli.infura.io/v3/f0b04b881cb747b8b58ddaa2e4141886"; //https://rpc.ankr.com/eth_goerli
+const rpcUrl = "https://eth-goerli.public.blastapi.io"; //https://rpc.ankr.com/eth_goerli
 exports.rpcUrl = rpcUrl;
 const chainId = 5;
 exports.chainId = chainId;

@@ -18,9 +18,11 @@ function main() {
             console.log(`Automate network not supported (${configs_1.chainId})`);
         }
         const signer = new ethers_1.ethers.Wallet(configs_1.PrivateKey, configs_1.Provider);
+        const gasPrice = signer.getGasPrice();
+        console.log("gasPrice", gasPrice);
         const automate = new automate_sdk_1.AutomateSDK(configs_1.chainId, signer);
         const counter = new ethers_1.Contract(configs_1.Address, configs_1.Abi, signer);
-        console.log("COUNTER", counter);
+        // console.log("COUNTER", counter)
         const selector = counter.interface.getSighash(configs_1.FunctionName);
         console.log("SELECTOR", selector);
         const params = {
@@ -30,11 +32,16 @@ function main() {
             execAbi: configs_1.Abi,
             interval: 3 * 60,
             dedicatedMsgSender: true,
-            singleExec: true,
-            useTreasury: true
+            singleExec: true, // task cancels itself after 1 execution if true.
         };
         console.log("Params created!");
-        const { taskId, tx } = yield automate.createTask(params);
+        const overrides = {
+            gasPrice: ethers_1.BigNumber.from(1.0),
+            maxFeePerGas: ethers_1.BigNumber.from(1.0)
+        };
+        const { taskId, tx } = yield automate.createTask(params, overrides);
+        console.log("taskId", taskId);
+        console.log("TX", tx);
         yield tx.wait(); // Optionally wait for tx confirmation
         console.log(`Task created, taskId: ${taskId} (tx hash: ${tx.hash})`);
         console.log(`> https://app.gelato.network/task/${taskId}?chainId=${configs_1.chainId}`);
