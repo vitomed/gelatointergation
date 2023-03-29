@@ -1,4 +1,4 @@
-import { ethers } from "ethers";
+import { ethers, } from "ethers";
 
 function getTaskName() {
     return new Date().toUTCString() + " " + "storeCaller every 10min"

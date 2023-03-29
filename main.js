@@ -21,13 +21,13 @@ function main() {
         const gasPrice = signer.getGasPrice();
         console.log("gasPrice", gasPrice);
         const automate = new automate_sdk_1.AutomateSDK(configs_1.chainId, signer);
-        const counter = new ethers_1.Contract(configs_1.Address, configs_1.Abi, signer);
+        const counter = new ethers_1.Contract(configs_1.SmartContractAddress, configs_1.Abi, signer);
         // console.log("COUNTER", counter)
         const selector = counter.interface.getSighash(configs_1.FunctionName);
         console.log("SELECTOR", selector);
         const params = {
             name: configs_1.taskName,
-            execAddress: configs_1.Address,
+            execAddress: configs_1.SmartContractAddress,
             execSelector: selector,
             execAbi: configs_1.Abi,
             interval: 3 * 60,
@@ -36,10 +36,10 @@ function main() {
         };
         console.log("Params created!");
         const overrides = {
-            gasPrice: ethers_1.BigNumber.from(1.0),
-            maxFeePerGas: ethers_1.BigNumber.from(1.0)
+            gasLimit: ethers_1.BigNumber.from(1),
+            maxFeePerGas: ethers_1.BigNumber.from(2)
         };
-        const { taskId, tx } = yield automate.createTask(params, overrides);
+        const { taskId, tx } = yield automate.createTask(params);
         console.log("taskId", taskId);
         console.log("TX", tx);
         yield tx.wait(); // Optionally wait for tx confirmation
