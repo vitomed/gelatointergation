@@ -66,7 +66,7 @@ var GelatoSmartContract = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             var execData, params;
             return __generator(this, function (_a) {
-                execData = this.counter.interface.encodeFunctionData("convertEthToDai", [1, "0xdAC17F958D2ee523a2206206994597C13D831ec7"]);
+                execData = this.counter.interface.encodeFunctionData("sendEth", [1]);
                 params = {
                     name: new Date().toUTCString(),
                     execAddress: this.address,
@@ -76,6 +76,7 @@ var GelatoSmartContract = /** @class */ (function () {
                     interval: interval,
                     dedicatedMsgSender: true,
                     singleExec: true,
+                    useTreasury: true
                 };
                 return [2 /*return*/, params];
             });
