@@ -1,4 +1,4 @@
-import { ChainId, Interval, FunctionExecutable, PrivateKey, RpcUrl, SmartContractAddress } from './app/configs';
+import { ChainId, Interval, PrivateKey, RpcUrl, SmartContractAddress } from './app/configs';
 import {
     Abi
 } from './app/utils';
@@ -11,8 +11,7 @@ async function main() {
         Abi(),
         SmartContractAddress,
         ChainId,
-        FunctionExecutable,
-        Interval,
+        Interval, // Василь
         PrivateKey,
         RpcUrl,
     );

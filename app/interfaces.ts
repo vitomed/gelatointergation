@@ -29,3 +29,7 @@ interface CreateTaskOptions {
 }
 
 
+export {
+    CreateTaskOptions
+}
+

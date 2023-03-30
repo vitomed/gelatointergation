@@ -12,15 +12,15 @@ exports.FunctionExecutable = exports.SmartContractAddress = exports.Interval = e
 // const rpcUrl = "http://127.0.0.1:7545"
 // const chainId = 1337;
 // fork1
-const SmartContractAddress = "0x57a8Bbe9e4663f89209ea7e564d8852d1Cd1a5dc";
+var SmartContractAddress = "0x57a8Bbe9e4663f89209ea7e564d8852d1Cd1a5dc";
 exports.SmartContractAddress = SmartContractAddress;
-const PrivateKey = "ecd0476b2c3618a176c7fd6be1881f302fa0eead0d1d612555c4785229fb9252";
+var PrivateKey = "ecd0476b2c3618a176c7fd6be1881f302fa0eead0d1d612555c4785229fb9252";
 exports.PrivateKey = PrivateKey;
-const RpcUrl = "http://127.0.0.1:7540";
+var RpcUrl = "http://127.0.0.1:7540";
 exports.RpcUrl = RpcUrl;
-const ChainId = 1337;
+var ChainId = 1337;
 exports.ChainId = ChainId;
-const Interval = 1;
+var Interval = 1;
 exports.Interval = Interval;
-const FunctionExecutable = "convertEthToDai(uint minDaiAmount, address tokenAddress)";
+var FunctionExecutable = "convertEthToDai(uint minDaiAmount, address tokenAddress)";
 exports.FunctionExecutable = FunctionExecutable;

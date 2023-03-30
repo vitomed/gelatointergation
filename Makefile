@@ -1,4 +1,4 @@
 build:
-	npx tsc
+	npx tsc main.ts
 run:
 	node main.js
