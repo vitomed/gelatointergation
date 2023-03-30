@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.connectToWallet = exports.getTaskName = exports.getAbi = void 0;
+exports.connectToWallet = exports.getTaskName = exports.Abi = void 0;
 const ethers_1 = require("ethers");
 function getTaskName() {
     return new Date().toUTCString() + " " + "storeCaller every 10min";
@@ -11,7 +11,7 @@ function connectToWallet(url, chainId) {
     return connection;
 }
 exports.connectToWallet = connectToWallet;
-function getAbi() {
+function Abi() {
     return `[
         {
             "inputs": [
@@ -55,4 +55,4 @@ function getAbi() {
         }
     ]`;
 }
-exports.getAbi = getAbi;
+exports.Abi = Abi;

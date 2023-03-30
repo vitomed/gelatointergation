@@ -9,7 +9,7 @@ function connectToWallet(url: string, chainId: number) {
     return connection
 }
 
-function getAbi(){
+function Abi(){
     return `[
         {
             "inputs": [
@@ -55,7 +55,7 @@ function getAbi(){
 }
 
 export { 
-    getAbi,
+    Abi,
     getTaskName,
     connectToWallet
 }

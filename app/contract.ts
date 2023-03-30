@@ -17,6 +17,7 @@ class Fork1 {
 }
 
 class GelatoSmartContract {
+    private abi: string;
     private address: string;
     private interval: number;
     private rpcUrl: string;
@@ -25,7 +26,6 @@ class GelatoSmartContract {
     private provider: ethers.providers.JsonRpcProvider;
     private signer: ethers.Wallet;
     private taskName: string;
-    private abi: string;
     private counter: Contract;
     private selector: string
     
@@ -82,4 +82,8 @@ class GelatoSmartContract {
         console.log(`Task created, taskId: ${taskId} (tx hash: ${tx.hash})`);
         console.log(`> https://app.gelato.network/task/${taskId}?chainId=${this.chainId}`);
     }
+}
+
+export {
+    GelatoSmartContract
 }

@@ -9,42 +9,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const automate_sdk_1 = require("@gelatonetwork/automate-sdk");
-const ethers_1 = require("ethers");
 const configs_1 = require("./app/configs");
+const utils_1 = require("./app/utils");
+const contract_1 = require("./app/contract");
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
-        if (!(0, automate_sdk_1.isAutomateSupported)(configs_1.chainId)) {
-            console.log(`Automate network not supported (${configs_1.chainId})`);
-        }
-        const signer = new ethers_1.ethers.Wallet(configs_1.PrivateKey, configs_1.Provider);
-        const gasPrice = signer.getGasPrice();
-        console.log("gasPrice", gasPrice);
-        const automate = new automate_sdk_1.AutomateSDK(configs_1.chainId, signer);
-        const counter = new ethers_1.Contract(configs_1.SmartContractAddress, configs_1.Abi, signer);
-        // console.log("COUNTER", counter)
-        const selector = counter.interface.getSighash(configs_1.FunctionName);
-        console.log("SELECTOR", selector);
-        const params = {
-            name: configs_1.taskName,
-            execAddress: configs_1.SmartContractAddress,
-            execSelector: selector,
-            execAbi: configs_1.Abi,
-            interval: 3 * 60,
-            dedicatedMsgSender: true,
-            singleExec: true, // task cancels itself after 1 execution if true.
-        };
-        console.log("Params created!");
-        const overrides = {
-            gasLimit: ethers_1.BigNumber.from(1),
-            maxFeePerGas: ethers_1.BigNumber.from(2)
-        };
-        const { taskId, tx } = yield automate.createTask(params);
-        console.log("taskId", taskId);
-        console.log("TX", tx);
-        yield tx.wait(); // Optionally wait for tx confirmation
-        console.log(`Task created, taskId: ${taskId} (tx hash: ${tx.hash})`);
-        console.log(`> https://app.gelato.network/task/${taskId}?chainId=${configs_1.chainId}`);
+        let gs = new contract_1.GelatoSmartContract((0, utils_1.Abi)(), configs_1.SmartContractAddress, configs_1.ChainId, configs_1.FunctionExecutable, configs_1.Interval, configs_1.PrivateKey, configs_1.RpcUrl);
+        yield gs.automate();
     });
 }
 main()
