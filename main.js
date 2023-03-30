@@ -36,8 +36,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var configs_1 = require("./app/configs");
-var contract_1 = require("./app/contract");
+var configs_1 = require("./src/configs");
+var contract_1 = require("./src/contract");
 function main() {
     return __awaiter(this, void 0, void 0, function () {
         var gs;
