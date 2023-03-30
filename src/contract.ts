@@ -55,12 +55,40 @@ class GelatoSmartContract {
     }
 
     async automate(): Promise<void> {
-        let taskParams = await this.getTaskParams(this.interval)
-        const automate = new AutomateSDK(this.chainId, this.signer);
-        const { taskId, tx }: TaskTransaction = await automate.createTask(taskParams);
-        await tx.wait();
+        const SmartContractAddress: string = ""
+        const PrivateKey: string = "";
+        const rpcUrl = ""
+        const chainId = 5;
+        const FunctionName: string = "sendEth(uint256 amount)"
+
+        
+        const Abi: string = ""
+        const Provider = new ethers.providers.JsonRpcProvider(rpcUrl, chainId);
+        const taskName: string = new Date().toUTCString()
+
+        const signer = new ethers.Wallet(PrivateKey, Provider);
+        const automate = new AutomateSDK(chainId, signer);
+        const counter = new Contract(SmartContractAddress, Abi, signer);
+        const selector = counter.interface.getSighash(FunctionName);
+        console.log("SELECTOR", selector)
+        const execData = counter.interface.encodeFunctionData("", [1]);
+        const params: CreateTaskOptions = {
+            name: taskName,
+            execAddress: SmartContractAddress,
+            execSelector: selector,
+            execData,
+            execAbi: Abi,
+            interval: 3 * 60, // execute every 3 minutes
+            dedicatedMsgSender: true,
+            singleExec: true,  // task cancels itself after 1 execution if true.
+        };
+        console.log("Params created!")
+        const { taskId, tx }: TaskTransaction = await automate.createTask(params);
+        console.log("taskId", taskId)
+        console.log("TX", tx)
+        await tx.wait(); // Optionally wait for tx confirmation
         console.log(`Task created, taskId: ${taskId} (tx hash: ${tx.hash})`);
-        console.log(`> https://app.gelato.network/task/${taskId}?chainId=${this.chainId}`);
+        console.log(`> https://app.gelato.network/task/${taskId}?chainId=${chainId}`);
     }
 }
 

@@ -10,16 +10,6 @@ var RpcUrl = "https://goerli.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161";
 exports.RpcUrl = RpcUrl;
 var ChainId = 5;
 exports.ChainId = ChainId;
-// ganache
-// const SmartContractAddress: string = "0xEf8a6dD37908E418b1596dAD00226Bd2A62c3D7f"
-// const PrivateKey: string = "41c43367790db5391b8e2977a5807e9f1819e2e01f17a875a0c71d381228ab7d";
-// const rpcUrl = "http://127.0.0.1:7545"
-// const chainId = 1337;
-// fork1
-// const SmartContractAddress: string = "0x57a8Bbe9e4663f89209ea7e564d8852d1Cd1a5dc"
-// const PrivateKey: string = "ecd0476b2c3618a176c7fd6be1881f302fa0eead0d1d612555c4785229fb9252";
-// const RpcUrl = "http://127.0.0.1:7540"
-// const ChainId = 1337;
 // Common Parametrs
 var Interval = 3 * 60;
 exports.Interval = Interval;
