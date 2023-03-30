@@ -17,8 +17,51 @@ const RpcUrl = "http://127.0.0.1:7540"
 const ChainId = 1337;
 const Interval = 1;
 const FunctionExecutable: string = "convertEthToDai(uint minDaiAmount, address tokenAddress)"
+const Abi = `[
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "minDaiAmount",
+                "type": "uint256"
+            },
+            {
+                "internalType": "address",
+                "name": "tokenAddress",
+                "type": "address"
+            }
+        ],
+        "name": "convertEthToDai",
+        "outputs": [],
+        "stateMutability": "payable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "stateMutability": "nonpayable",
+        "type": "constructor"
+    },
+    {
+        "stateMutability": "payable",
+        "type": "receive"
+    },
+    {
+        "inputs": [],
+        "name": "uniswapRouter",
+        "outputs": [
+            {
+                "internalType": "contract IUniswapV2Router02",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+}
+]`
 
 export { 
+    Abi,
     PrivateKey,
     RpcUrl,
     ChainId,

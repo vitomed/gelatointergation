@@ -5,7 +5,7 @@
 // const rpcUrl = "https://rpc.ankr.com/eth_goerli"
 // const chainId = 5;
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.FunctionExecutable = exports.SmartContractAddress = exports.Interval = exports.ChainId = exports.RpcUrl = exports.PrivateKey = void 0;
+exports.FunctionExecutable = exports.SmartContractAddress = exports.Interval = exports.ChainId = exports.RpcUrl = exports.PrivateKey = exports.Abi = void 0;
 // ganache
 // const SmartContractAddress: string = "0xEf8a6dD37908E418b1596dAD00226Bd2A62c3D7f"
 // const PrivateKey: string = "41c43367790db5391b8e2977a5807e9f1819e2e01f17a875a0c71d381228ab7d";
@@ -24,3 +24,5 @@ var Interval = 1;
 exports.Interval = Interval;
 var FunctionExecutable = "convertEthToDai(uint minDaiAmount, address tokenAddress)";
 exports.FunctionExecutable = FunctionExecutable;
+var Abi = "[\n    {\n        \"inputs\": [\n            {\n                \"internalType\": \"uint256\",\n                \"name\": \"minDaiAmount\",\n                \"type\": \"uint256\"\n            },\n            {\n                \"internalType\": \"address\",\n                \"name\": \"tokenAddress\",\n                \"type\": \"address\"\n            }\n        ],\n        \"name\": \"convertEthToDai\",\n        \"outputs\": [],\n        \"stateMutability\": \"payable\",\n        \"type\": \"function\"\n    },\n    {\n        \"inputs\": [],\n        \"stateMutability\": \"nonpayable\",\n        \"type\": \"constructor\"\n    },\n    {\n        \"stateMutability\": \"payable\",\n        \"type\": \"receive\"\n    },\n    {\n        \"inputs\": [],\n        \"name\": \"uniswapRouter\",\n        \"outputs\": [\n            {\n                \"internalType\": \"contract IUniswapV2Router02\",\n                \"name\": \"\",\n                \"type\": \"address\"\n            }\n        ],\n        \"stateMutability\": \"view\",\n        \"type\": \"function\"\n}\n]";
+exports.Abi = Abi;

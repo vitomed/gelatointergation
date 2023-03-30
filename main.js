@@ -37,7 +37,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var configs_1 = require("./app/configs");
-var utils_1 = require("./app/utils");
 var contract_1 = require("./app/contract");
 function main() {
     return __awaiter(this, void 0, void 0, function () {
@@ -45,7 +44,7 @@ function main() {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    gs = new contract_1.GelatoSmartContract((0, utils_1.Abi)(), configs_1.SmartContractAddress, configs_1.ChainId, configs_1.Interval, // Василь
+                    gs = new contract_1.GelatoSmartContract(configs_1.Abi, configs_1.SmartContractAddress, configs_1.ChainId, configs_1.Interval, // Василь
                     configs_1.PrivateKey, configs_1.RpcUrl);
                     return [4 /*yield*/, gs.automate()];
                 case 1:
