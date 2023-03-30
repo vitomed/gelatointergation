@@ -15,28 +15,23 @@ async function main() {
     console.log(`Automate network not supported (${chainId})`)
   }
   const signer = new ethers.Wallet(PrivateKey, Provider);
-  const gasPrice = signer.getGasPrice();
-  console.log("gasPrice", gasPrice)
-
   const automate = new AutomateSDK(chainId, signer);
   const counter = new Contract(SmartContractAddress, Abi, signer);
   // console.log("COUNTER", counter)
   const selector = counter.interface.getSighash(FunctionName);
   console.log("SELECTOR", selector)
+  const execData = counter.interface.encodeFunctionData("convertEthToDai", [1, "0xdAC17F958D2ee523a2206206994597C13D831ec7"]);
   const params: CreateTaskOptions = {
     name: taskName,
     execAddress: SmartContractAddress,
     execSelector: selector,
+    execData,
     execAbi: Abi,
     interval: 3 * 60, // execute every 3 minutes
     dedicatedMsgSender: true,
     singleExec: true,  // task cancels itself after 1 execution if true.
   };
   console.log("Params created!")
-  const overrides: Overrides = {
-    gasLimit: BigNumber.from(1),
-    maxFeePerGas: BigNumber.from(2)
-  }
   const { taskId, tx }: TaskTransaction = await automate.createTask(params);
   console.log("taskId", taskId)
   console.log("TX", tx)

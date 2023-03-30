@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.connectToWallet = exports.getTaskName = void 0;
+exports.connectToWallet = exports.getTaskName = exports.getAbi = void 0;
 const ethers_1 = require("ethers");
 function getTaskName() {
     return new Date().toUTCString() + " " + "storeCaller every 10min";
@@ -11,3 +11,48 @@ function connectToWallet(url, chainId) {
     return connection;
 }
 exports.connectToWallet = connectToWallet;
+function getAbi() {
+    return `[
+        {
+            "inputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "minDaiAmount",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "address",
+                    "name": "tokenAddress",
+                    "type": "address"
+                }
+            ],
+            "name": "convertEthToDai",
+            "outputs": [],
+            "stateMutability": "payable",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "stateMutability": "nonpayable",
+            "type": "constructor"
+        },
+        {
+            "stateMutability": "payable",
+            "type": "receive"
+        },
+        {
+            "inputs": [],
+            "name": "uniswapRouter",
+            "outputs": [
+                {
+                    "internalType": "contract IUniswapV2Router02",
+                    "name": "",
+                    "type": "address"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        }
+    ]`;
+}
+exports.getAbi = getAbi;

@@ -13,75 +13,20 @@ const utils_1 = require("./utils");
 // const rpcUrl = "http://127.0.0.1:7545"
 // const chainId = 1337;
 // fork1
-const SmartContractAddress = "0x54364efd8b3527AcfC064baEF5b60c127D5566D7";
+const SmartContractAddress = "0x57a8Bbe9e4663f89209ea7e564d8852d1Cd1a5dc";
 exports.SmartContractAddress = SmartContractAddress;
-const PrivateKey = "9ecf42bbc9cc4be6ec30c6cf99965a37cc6d7c0abaf11c62b4e0fbf371b5be4f";
+const PrivateKey = "0xecd0476b2c3618a176c7fd6be1881f302fa0eead0d1d612555c4785229fb9252";
 exports.PrivateKey = PrivateKey;
 const rpcUrl = "http://127.0.0.1:7540";
 exports.rpcUrl = rpcUrl;
-const chainId = 1;
+const chainId = 1337;
 exports.chainId = chainId;
 const Provider = (0, utils_1.connectToWallet)(rpcUrl, chainId);
 exports.Provider = Provider;
 const taskName = (0, utils_1.getTaskName)();
 exports.taskName = taskName;
 console.log(taskName);
-const FunctionName = "convertEthToDai(uint 1)";
+const FunctionName = "convertEthToDai(uint minDaiAmount, address tokenAddress)";
 exports.FunctionName = FunctionName;
-const Abi = `[
-    {
-        "inputs": [],
-        "stateMutability": "nonpayable",
-        "type": "constructor"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "uint256",
-                "name": "daiAmount",
-                "type": "uint256"
-            }
-        ],
-        "name": "convertEthToDai",
-        "outputs": [],
-        "stateMutability": "payable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "uint256",
-                "name": "daiAmount",
-                "type": "uint256"
-            }
-        ],
-        "name": "getEstimatedETHforDAI",
-        "outputs": [
-            {
-                "internalType": "uint256[]",
-                "name": "",
-                "type": "uint256[]"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "uniswapRouter",
-        "outputs": [
-            {
-                "internalType": "contract IUniswapV2Router02",
-                "name": "",
-                "type": "address"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "stateMutability": "payable",
-        "type": "receive"
-    }
-]`;
+const Abi = (0, utils_1.getAbi)();
 exports.Abi = Abi;

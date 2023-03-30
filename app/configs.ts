@@ -1,6 +1,7 @@
 import {
     connectToWallet,
-    getTaskName
+    getTaskName,
+    getAbi
 } from './utils';
 
 // goerli
@@ -16,72 +17,16 @@ import {
 // const chainId = 1337;
 
 // fork1
-const SmartContractAddress: string = "0x54364efd8b3527AcfC064baEF5b60c127D5566D7"
-const PrivateKey: string = "9ecf42bbc9cc4be6ec30c6cf99965a37cc6d7c0abaf11c62b4e0fbf371b5be4f";
+const SmartContractAddress: string = "0x57a8Bbe9e4663f89209ea7e564d8852d1Cd1a5dc"
+const PrivateKey: string = "ecd0476b2c3618a176c7fd6be1881f302fa0eead0d1d612555c4785229fb9252";
 const rpcUrl = "http://127.0.0.1:7540"
-const chainId = 1;
-
-
+const chainId = 1337;
 const Provider = connectToWallet(rpcUrl, chainId);
 const taskName: string = getTaskName()
+const FunctionName: string = "convertEthToDai(uint minDaiAmount, address tokenAddress)"
+const Abi: string = getAbi()
+
 console.log(taskName)
-const FunctionName: string = "convertEthToDai(uint 1)"
-const Abi: string = `[
-    {
-        "inputs": [],
-        "stateMutability": "nonpayable",
-        "type": "constructor"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "uint256",
-                "name": "daiAmount",
-                "type": "uint256"
-            }
-        ],
-        "name": "convertEthToDai",
-        "outputs": [],
-        "stateMutability": "payable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "uint256",
-                "name": "daiAmount",
-                "type": "uint256"
-            }
-        ],
-        "name": "getEstimatedETHforDAI",
-        "outputs": [
-            {
-                "internalType": "uint256[]",
-                "name": "",
-                "type": "uint256[]"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "uniswapRouter",
-        "outputs": [
-            {
-                "internalType": "contract IUniswapV2Router02",
-                "name": "",
-                "type": "address"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "stateMutability": "payable",
-        "type": "receive"
-    }
-]`
 export { 
     PrivateKey,
     Provider,
