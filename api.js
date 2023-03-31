@@ -36,54 +36,23 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var ethers_1 = require("ethers");
-var safe_ethers_lib_1 = require("@safe-global/safe-ethers-lib");
-var safe_service_client_1 = require("@safe-global/safe-service-client");
-var safe_core_sdk_1 = require("@safe-global/safe-core-sdk");
-var RPC_URL = 'https://eth-goerli.public.blastapi.io';
-var provider = new ethers_1.ethers.providers.JsonRpcProvider(RPC_URL);
-var PV = '34ad0e0bcc736f18eb987fc4094ff5ff6744fecda5f3fea51901955547a226a2';
-// Initialize signers
-var owner1Signer = new ethers_1.ethers.Wallet(PV, provider);
-var ethAdapterOwner1 = new safe_ethers_lib_1.default({
-    ethers: ethers_1.ethers,
-    signerOrProvider: owner1Signer
-});
-function main() {
-    return __awaiter(this, void 0, void 0, function () {
-        var txServiceUrl, safeService, safeFactory, safeAccountConfig, safeSdkOwner1, safeAddress;
-        var _a;
-        return __generator(this, function (_b) {
-            switch (_b.label) {
-                case 0:
-                    txServiceUrl = 'https://safe-transaction-goerli.safe.global';
-                    safeService = new safe_service_client_1.default({ txServiceUrl: txServiceUrl, ethAdapter: ethAdapterOwner1 });
-                    return [4 /*yield*/, safe_core_sdk_1.SafeFactory.create({ ethAdapter: ethAdapterOwner1 })];
-                case 1:
-                    safeFactory = _b.sent();
-                    _a = {};
-                    return [4 /*yield*/, owner1Signer.getAddress()];
-                case 2:
-                    safeAccountConfig = (_a.owners = [
-                        _b.sent()
-                    ],
-                        _a.threshold = 1,
-                        _a);
-                    return [4 /*yield*/, safeFactory.deploySafe({ safeAccountConfig: safeAccountConfig })];
-                case 3:
-                    safeSdkOwner1 = _b.sent();
-                    safeAddress = safeSdkOwner1.getAddress();
-                    console.log('Your Safe has been deployed:');
-                    console.log("https://goerli.etherscan.io/address/".concat(safeAddress));
-                    console.log("https://app.safe.global/gor:".concat(safeAddress));
-                    return [2 /*return*/];
-            }
-        });
+// import {getSafeAddr} from "./safe"
+var cors = require('cors');
+var express = require("express");
+var app = express();
+app.use(cors());
+app.use(express.json());
+app.post('/api', cors(), function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var msg;
+    return __generator(this, function (_a) {
+        msg = "SERVER!";
+        console.log(msg);
+        res.status(200);
+        res.send({ "OK": 200 });
+        return [2 /*return*/];
     });
-}
-main()
-    .then(function () { return process.exit(0); })
-    .catch(function (error) {
-    console.error(error);
-    process.exit(1);
+}); });
+var port = 7070;
+app.listen(port, function () {
+    console.log("Server is listening on port ".concat(port, "."));
 });

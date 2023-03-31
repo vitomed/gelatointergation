@@ -40,22 +40,21 @@ var ethers_1 = require("ethers");
 var safe_ethers_lib_1 = require("@safe-global/safe-ethers-lib");
 var safe_service_client_1 = require("@safe-global/safe-service-client");
 var safe_core_sdk_1 = require("@safe-global/safe-core-sdk");
-var RPC_URL = 'https://eth-goerli.public.blastapi.io';
-var provider = new ethers_1.ethers.providers.JsonRpcProvider(RPC_URL);
-var PV = '34ad0e0bcc736f18eb987fc4094ff5ff6744fecda5f3fea51901955547a226a2';
-// Initialize signers
-var owner1Signer = new ethers_1.ethers.Wallet(PV, provider);
-var ethAdapterOwner1 = new safe_ethers_lib_1.default({
-    ethers: ethers_1.ethers,
-    signerOrProvider: owner1Signer
-});
-function main() {
+function getSafeAddr() {
     return __awaiter(this, void 0, void 0, function () {
-        var txServiceUrl, safeService, safeFactory, safeAccountConfig, safeSdkOwner1, safeAddress;
+        var RPC_URL, provider, PV, owner1Signer, ethAdapterOwner1, txServiceUrl, safeService, safeFactory, safeAccountConfig, safeSdkOwner1, safeAddress;
         var _a;
         return __generator(this, function (_b) {
             switch (_b.label) {
                 case 0:
+                    RPC_URL = 'https://eth-goerli.public.blastapi.io';
+                    provider = new ethers_1.ethers.providers.JsonRpcProvider(RPC_URL);
+                    PV = "3488d10166741e0a810542c797e6022e61652ac837df981a00059864c3dfafed";
+                    owner1Signer = new ethers_1.ethers.Wallet(PV, provider);
+                    ethAdapterOwner1 = new safe_ethers_lib_1.default({
+                        ethers: ethers_1.ethers,
+                        signerOrProvider: owner1Signer
+                    });
                     txServiceUrl = 'https://safe-transaction-goerli.safe.global';
                     safeService = new safe_service_client_1.default({ txServiceUrl: txServiceUrl, ethAdapter: ethAdapterOwner1 });
                     return [4 /*yield*/, safe_core_sdk_1.SafeFactory.create({ ethAdapter: ethAdapterOwner1 })];
@@ -81,9 +80,12 @@ function main() {
         });
     });
 }
-main()
+getSafeAddr()
     .then(function () { return process.exit(0); })
     .catch(function (error) {
     console.error(error);
     process.exit(1);
 });
+// export {
+//   getSafeAddr
+// }
