@@ -1,45 +1,43 @@
-import { ethers } from 'ethers'
-import EthersAdapter from '@safe-global/safe-ethers-lib'
-import SafeServiceClient from '@safe-global/safe-service-client'
-import { SafeFactory } from '@safe-global/safe-core-sdk'
-import { SafeAccountConfig } from '@safe-global/safe-core-sdk'
- 
-const RPC_URL='https://eth-goerli.public.blastapi.io'
-const provider = new ethers.providers.JsonRpcProvider(RPC_URL)
-const PV = '34ad0e0bcc736f18eb987fc4094ff5ff6744fecda5f3fea51901955547a226a2'
- 
-// Initialize signers
-const owner1Signer = new ethers.Wallet(PV, provider)
- 
-const ethAdapterOwner1 = new EthersAdapter({
-  ethers,
-  signerOrProvider: owner1Signer
-})
- 
+import { AutomateSDK, TaskTransaction, CreateTaskOptions, isAutomateSupported } from "@gelatonetwork/automate-sdk";
+import { Contract, ethers} from "ethers";
+import {
+  PrivateKey, 
+  ChainId, 
+  FunctionExecutable,
+  SmartContractAddress,
+  Abi,
+  RpcUrl
+} from './src/configs';
+
 async function main() {
-    const txServiceUrl = 'https://safe-transaction-goerli.safe.global'
-    const safeService = new SafeServiceClient({ txServiceUrl, ethAdapter: ethAdapterOwner1 })
-    const safeFactory = await SafeFactory.create({ ethAdapter: ethAdapterOwner1 })
- 
-    const safeAccountConfig: SafeAccountConfig = {
-      owners: [
-        await owner1Signer.getAddress(),
-      ],
-      threshold: 1,
-      // ... (Optional params)
-    }
- 
-    /* This Safe is tied to owner 1 because the factory was initialized with
-    an adapter that had owner 1 as the signer. */
-    const safeSdkOwner1 = await safeFactory.deploySafe({ safeAccountConfig })
- 
-    const safeAddress = safeSdkOwner1.getAddress()
- 
-    console.log('Your Safe has been deployed:')
-    console.log(`https://goerli.etherscan.io/address/${safeAddress}`)
-    console.log(`https://app.safe.global/gor:${safeAddress}`)
+  if (!isAutomateSupported(ChainId)) {
+    console.log(`Automate network not supported (${ChainId})`)
+  }
+  const Provider = new ethers.providers.JsonRpcProvider(RpcUrl, ChainId);
+  const signer = new ethers.Wallet(PrivateKey, Provider);
+  const automate = new AutomateSDK(ChainId, signer);
+  const counter = new Contract(SmartContractAddress, Abi, signer);
+  const selector = counter.interface.getSighash(FunctionExecutable);
+  console.log("SELECTOR", selector)
+  const execData = counter.interface.encodeFunctionData("convertEthToDai", [1, "0xdAC17F958D2ee523a2206206994597C13D831ec7"]);
+  const params: CreateTaskOptions = {
+      name: "taskName",
+      execAddress: SmartContractAddress,
+      execSelector: selector,
+      execData,
+      execAbi: Abi,
+      interval: 3 * 60, // execute every 3 minutes
+      dedicatedMsgSender: true,
+      singleExec: true,  // task cancels itself after 1 execution if true.
+  };
+  console.log("Params created!")
+  const { taskId, tx }: TaskTransaction = await automate.createTask(params);
+  console.log("taskId", taskId)
+  console.log("TX", tx)
+  await tx.wait(); // Optionally wait for tx confirmation
+  console.log(`Task created, taskId: ${taskId} (tx hash: ${tx.hash})`);
+  console.log(`> https://app.gelato.network/task/${taskId}?chainId=${chainId}`);
 }
- 
 main()
   .then(() => process.exit(0))
   .catch((error) => {
