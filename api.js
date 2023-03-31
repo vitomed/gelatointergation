@@ -36,7 +36,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// import {getSafeAddr} from "./safe"
 var cors = require('cors');
 var express = require("express");
 var app = express();
@@ -47,6 +46,7 @@ app.post('/api', cors(), function (req, res) { return __awaiter(void 0, void 0, 
     return __generator(this, function (_a) {
         msg = "SERVER!";
         console.log(msg);
+        // await createStrategy() 
         res.status(200);
         res.send({ "OK": 200 });
         return [2 /*return*/];
@@ -55,4 +55,8 @@ app.post('/api', cors(), function (req, res) { return __awaiter(void 0, void 0, 
 var port = 7070;
 app.listen(port, function () {
     console.log("Server is listening on port ".concat(port, "."));
+});
+process.on('SIGINT', function () {
+    console.log("\nGracefully shutting down from SIGINT (Ctrl-C)");
+    process.exit(0);
 });
